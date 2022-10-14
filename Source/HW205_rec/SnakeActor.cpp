@@ -3,6 +3,7 @@
 
 #include "SnakeActor.h"
 #include "SnakeElementBase.h"
+#include "UnrealInterface.h"
 
 // Sets default values
 ASnakeActor::ASnakeActor()
@@ -39,6 +40,7 @@ void ASnakeActor::AddSnakeElement(int ElemNum)
 		FVector NewLoc(SnakeElements.Num() * ElemSize, 0, 0);
 		FTransform NewTransform(NewLoc);
 		ASnakeElementBase* NewSnakeElement = GetWorld()->SpawnActor<ASnakeElementBase>(SnakeElementClass, NewTransform);
+		NewSnakeElement->SnakeOwner = this;
 		int32 ElIndex = SnakeElements.Add(NewSnakeElement);
 		if (ElIndex == 0)
 		{
@@ -51,7 +53,7 @@ void ASnakeActor::AddSnakeElement(int ElemNum)
 void ASnakeActor::Move()
 {
 	FVector MovementVector(ForceInitToZero);
-	MovementSpeed = ElemSize;
+	
 	if (LastMoveDirection == EMovementDirection::UP)
 	{
 		MovementVector = FVector(MovementSpeed, 0, 0);
@@ -59,23 +61,24 @@ void ASnakeActor::Move()
 	switch (LastMoveDirection)
 	{
 	case EMovementDirection::UP:
-		MovementVector.X = MovementSpeed;
+		MovementVector.X = ElemSize;
 		break;
 
 	case EMovementDirection::DOWN:
-		MovementVector.X -= MovementSpeed;
+		MovementVector.X -= ElemSize;
 		break;
 
 	case EMovementDirection::LEFT:
-		MovementVector.Y += MovementSpeed;
+		MovementVector.Y += ElemSize;
 		break;
 
 	case EMovementDirection::RIGHT:
-		MovementVector.Y -= MovementSpeed;
+		MovementVector.Y -= ElemSize;
 		break;
 	}
 
 	//AddActorWorldOffset(MovementVector);
+	SnakeElements[0]->ToggleCol();
 
 	for (int i = SnakeElements.Num() - 1; i > 0; i--) 
 	{
@@ -86,5 +89,21 @@ void ASnakeActor::Move()
 	}
 
 	SnakeElements[0]->AddActorWorldOffset(MovementVector);
+	SnakeElements[0]->ToggleCol();
+}
+
+void ASnakeActor::SnakeElementOverlap(ASnakeElementBase* OverlappedBlock, AActor* Other)
+{
+	if (IsValid(OverlappedBlock))
+	{
+		int32 ElemIndex;
+		SnakeElements.Find(OverlappedBlock, ElemIndex);
+		bool first = ElemIndex == 0;
+		IUnrealInterface* InInter = Cast<IUnrealInterface>(Other);
+		if (InInter)
+		{			
+			InInter->Interact(this, first);
+		}
+	}
 }
 

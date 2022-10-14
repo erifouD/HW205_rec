@@ -20,6 +20,8 @@ class HW205_REC_API IUnrealInterface
 {
 	GENERATED_BODY()
 
-	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
+		// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
+
+	virtual void Interact(AActor* Interactor, bool DDHead);
 };

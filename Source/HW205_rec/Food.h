@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "UnrealInterface.h"
 #include "Food.generated.h"
 
 UCLASS()
-class HW205_REC_API AFood : public AActor
+class HW205_REC_API AFood : public AActor, public IUnrealInterface
 {
 	GENERATED_BODY()
 	
@@ -23,4 +24,5 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	virtual void Interact(AActor* Interactor, bool DDHead) override;
 };
