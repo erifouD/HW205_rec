@@ -24,8 +24,18 @@ void ASnakeActor::BeginPlay()
 	Super::BeginPlay();
 	AddSnakeElement(5);
 	SetActorTickInterval(MovementSpeed);
+
+	int32 x = FMath::FRandRange(-8, 8);
+	int32 y = FMath::FRandRange(-8, 8);
+
+	x = x * 60;
+	y = y * 60;
+	FVector Locati(x, y, 0);
+	FTransform FoodTrans(Locati);
+	AFood* NewFood = GetWorld()->SpawnActor<AFood>(FoodClass, FoodTrans);
 	
 }
+
 
 // Called every frame
 void ASnakeActor::Tick(float DeltaTime)

@@ -37,6 +37,16 @@ void AFood::Interact(AActor* Interactor, bool DDHead)
 		{
 			Snake->AddSnakeElement();
 		}
+		int32 x = FMath::FRandRange(-8, 8);
+		int32 y = FMath::FRandRange(-8, 8);
+
+		x = x * 60;
+		y = y * 60;
+		FVector Locati(x, y, 0);
+		FTransform FoodTrans(Locati);
+
+		AFood* NewFood = GetWorld()->SpawnActor<AFood>(Snake->FoodClass, FoodTrans);
 	}
 	Destroy();
+
 }

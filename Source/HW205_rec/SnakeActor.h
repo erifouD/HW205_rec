@@ -8,6 +8,7 @@
 
 
 class ASnakeElementBase;
+class AFood;
 
 UENUM()
 enum class EMovementDirection
@@ -29,6 +30,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<ASnakeElementBase> SnakeElementClass;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AFood> FoodClass;
 
 
 	UPROPERTY()
