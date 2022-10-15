@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "UnrealInterface.h"
 #include "Wall.generated.h"
 
 UCLASS()
-class HW205_REC_API AWall : public AActor
+class HW205_REC_API AWall : public AActor, public IUnrealInterface
 {
 	GENERATED_BODY()
 	
@@ -22,5 +23,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	virtual void Interact(AActor* Interactor, bool DDHead) override;
 
 };

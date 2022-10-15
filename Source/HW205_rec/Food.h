@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "UnrealInterface.h"
+#include "GameFramework/Actor.h"
 #include "Food.generated.h"
 
 UCLASS()
@@ -15,6 +16,9 @@ class HW205_REC_API AFood : public AActor, public IUnrealInterface
 public:	
 	// Sets default values for this actor's properties
 	AFood();
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStaticMeshComponent* MeshComp;
 
 protected:
 	// Called when the game starts or when spawned

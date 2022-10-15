@@ -3,7 +3,9 @@
 
 #include "SnakeActor.h"
 #include "SnakeElementBase.h"
+#include "Food.h"
 #include "UnrealInterface.h"
+
 
 // Sets default values
 ASnakeActor::ASnakeActor()
@@ -37,8 +39,19 @@ void ASnakeActor::AddSnakeElement(int ElemNum)
 
 	for (int i = 0; i < ElemNum; i++)
 	{
-		FVector NewLoc(SnakeElements.Num() * ElemSize, 0, 0);
-		FTransform NewTransform(NewLoc);
+		FVector PreLoc;
+		if ((SnakeElements.Num() == 0) || ElemNum > 2)
+		{
+			PreLoc = FVector(SnakeElements.Num() * ElemSize, 0, 0);
+		}
+		else
+		{
+			PreLoc = FVector(SnakeElements.Last()->GetActorLocation());
+		}
+		
+
+		//FVector NewLoc(PreLoc);
+		FTransform NewTransform(PreLoc);
 		ASnakeElementBase* NewSnakeElement = GetWorld()->SpawnActor<ASnakeElementBase>(SnakeElementClass, NewTransform);
 		NewSnakeElement->SnakeOwner = this;
 		int32 ElIndex = SnakeElements.Add(NewSnakeElement);

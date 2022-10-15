@@ -30,6 +30,7 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<ASnakeElementBase> SnakeElementClass;
 
+
 	UPROPERTY()
 	TArray<ASnakeElementBase*> SnakeElements;
 

@@ -40,6 +40,11 @@ void ASnakeElementBase::Interact(AActor* Interactor, bool DDHead)
 	if (IsValid(Snake))
 	{
 		Snake->Destroy();
+		for (int i = 0; i < Snake->SnakeElements.Num(); i++)
+		{
+			Snake->SnakeElements[i]->Destroy();
+		}
+		
 	}
 }
 

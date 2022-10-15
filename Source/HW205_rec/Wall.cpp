@@ -2,6 +2,8 @@
 
 
 #include "Wall.h"
+#include "SnakeActor.h"
+#include "SnakeElementBase.h"
 
 // Sets default values
 AWall::AWall()
@@ -23,5 +25,19 @@ void AWall::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AWall::Interact(AActor* Interactor, bool DDHead)
+{
+	auto Snake = Cast<ASnakeActor>(Interactor);
+	if (IsValid(Snake))
+	{
+		Snake->Destroy();
+		for (int i = 0; i < Snake->SnakeElements.Num(); i++)
+		{
+			Snake->SnakeElements[i]->Destroy();
+		}
+
+	}
 }
 
