@@ -42,6 +42,7 @@ void ASnakeActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	Move();
+	TickDirection = LastMoveDirection;
 }
 
 void ASnakeActor::AddSnakeElement(int ElemNum)

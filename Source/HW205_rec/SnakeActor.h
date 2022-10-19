@@ -34,6 +34,8 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AFood> FoodClass;
 
+	EMovementDirection TickDirection;
+
 
 	UPROPERTY()
 	TArray<ASnakeElementBase*> SnakeElements;

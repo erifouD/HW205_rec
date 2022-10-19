@@ -46,20 +46,13 @@ void APlayerPawnBase::HPIVert(float value)
 {
 	if (IsValid(SnakeActorBase))
 	{
-		if (value > 0)
+		if (value > 0 && SnakeActorBase->TickDirection != EMovementDirection::DOWN)
 		{
-			if (SnakeActorBase->LastMoveDirection != EMovementDirection::DOWN)
-			{
-				SnakeActorBase->LastMoveDirection = EMovementDirection::UP;
-			}
+			SnakeActorBase->LastMoveDirection = EMovementDirection::UP;
 		}
-		else if (value < 0)
+		else if (value < 0 && SnakeActorBase->TickDirection != EMovementDirection::UP)
 		{
-			if (SnakeActorBase->LastMoveDirection != EMovementDirection::UP)
-			{
-				SnakeActorBase->LastMoveDirection = EMovementDirection::DOWN;
-			}
-			
+			SnakeActorBase->LastMoveDirection = EMovementDirection::DOWN;
 		}
 	}
 }
@@ -68,19 +61,13 @@ void APlayerPawnBase::HPIHor(float value)
 {
 	if (IsValid(SnakeActorBase))
 	{
-		if (value < 0)
+		if (value < 0 && SnakeActorBase->TickDirection != EMovementDirection::RIGHT)
 		{
-			if (SnakeActorBase->LastMoveDirection != EMovementDirection::RIGHT)
-			{
-				SnakeActorBase->LastMoveDirection = EMovementDirection::LEFT;
-			}
+			SnakeActorBase->LastMoveDirection = EMovementDirection::LEFT;
 		}
-		else if (value > 0)
+		else if (value > 0 && SnakeActorBase->TickDirection != EMovementDirection::LEFT)
 		{
-			if (SnakeActorBase->LastMoveDirection != EMovementDirection::LEFT)
-			{
-				SnakeActorBase->LastMoveDirection = EMovementDirection::RIGHT;
-			}
+			SnakeActorBase->LastMoveDirection = EMovementDirection::RIGHT;
 		}
 	}
 }
