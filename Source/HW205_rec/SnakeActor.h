@@ -36,6 +36,8 @@ public:
 
 	EMovementDirection TickDirection;
 
+	UPROPERTY(BlueprintReadWrite)
+	int32 ScoreCount;
 
 	UPROPERTY()
 	TArray<ASnakeElementBase*> SnakeElements;
@@ -60,6 +62,10 @@ public:
 	void AddSnakeElement(int ElemNum = 1);
 	UFUNCTION(BlueprintCallable)
 	void Move();
+
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void AddScore();
 
 	UFUNCTION()
 	void SnakeElementOverlap(ASnakeElementBase* OverlappedBlock, AActor* Other);

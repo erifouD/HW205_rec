@@ -25,7 +25,7 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	ASnakeActor* SnakeActorBase;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TSubclassOf<ASnakeActor> SnakeActorClass;
 
 protected:

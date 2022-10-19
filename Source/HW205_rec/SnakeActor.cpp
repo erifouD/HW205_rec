@@ -15,7 +15,7 @@ ASnakeActor::ASnakeActor()
 	ElemSize = 100.f;
 	MovementSpeed = 10.f;
 	LastMoveDirection = EMovementDirection::DOWN;
-
+	ScoreCount = 0;
 }
 
 // Called when the game starts or when spawned
@@ -28,8 +28,8 @@ void ASnakeActor::BeginPlay()
 	int32 x = FMath::FRandRange(-8, 8);
 	int32 y = FMath::FRandRange(-8, 8);
 
-	x = x * 60;
-	y = y * 60;
+	x = x * ElemSize;
+	y = y * ElemSize;
 	FVector Locati(x, y, 0);
 	FTransform FoodTrans(Locati);
 	AFood* NewFood = GetWorld()->SpawnActor<AFood>(FoodClass, FoodTrans);
