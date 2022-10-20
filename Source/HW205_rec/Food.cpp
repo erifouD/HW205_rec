@@ -36,19 +36,15 @@ void AFood::Interact(AActor* Interactor, bool DDHead)
 		if (IsValid(Snake))
 		{
 			Snake->AddSnakeElement();
-		}
-		int32 x = FMath::FRandRange(-8, 8);
-		int32 y = FMath::FRandRange(-8, 8);
-
-		x = x * Snake->ElemSize;
-		y = y * Snake->ElemSize;
-		FVector Locati(x, y, 0);
-		FTransform FoodTrans(Locati);
-
-		AFood* NewFood = GetWorld()->SpawnActor<AFood>(Snake->FoodClass, FoodTrans);
-		Snake->ScoreCount += 10;
-		Snake->AddScore();
-		
+			Snake->CreateFood();
+			Snake->ScoreCount += 10;
+			Snake->AddScore();
+			if (Snake->MovementSpeed > 0.01 && Snake->ScoreCount % 100 == 0.f)
+			{
+				Snake->MovementSpeed -= 0.01;
+				Snake->SetActorTickInterval(Snake->MovementSpeed);
+			}
+		}		
 	}
 	Destroy();
 

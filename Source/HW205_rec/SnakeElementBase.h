@@ -22,6 +22,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* StaticMeshComponent;
 
+
+
 	UPROPERTY()
 	ASnakeActor* SnakeOwner;
 protected:

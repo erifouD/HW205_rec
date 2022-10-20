@@ -39,6 +39,9 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	int32 ScoreCount;
 
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	int CountOfElementsOnStart = 3;
+
 	UPROPERTY()
 	TArray<ASnakeElementBase*> SnakeElements;
 
@@ -48,7 +51,7 @@ public:
 	UPROPERTY()
 	EMovementDirection LastMoveDirection;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	float MovementSpeed;
 
 protected:
@@ -59,10 +62,14 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	UFUNCTION(BlueprintCallable)
-	void AddSnakeElement(int ElemNum = 1);
+	void AddSnakeElement(int32 ElemCount = 1);
+
+
 	UFUNCTION(BlueprintCallable)
 	void Move();
 
+	UFUNCTION(BlueprintCallable)
+	void CreateFood();
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void AddScore();

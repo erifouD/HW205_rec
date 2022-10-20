@@ -22,18 +22,9 @@ ASnakeActor::ASnakeActor()
 void ASnakeActor::BeginPlay()
 {
 	Super::BeginPlay();
-	AddSnakeElement(5);
+	AddSnakeElement(CountOfElementsOnStart);
 	SetActorTickInterval(MovementSpeed);
-
-	int32 x = FMath::FRandRange(-8, 8);
-	int32 y = FMath::FRandRange(-8, 8);
-
-	x = x * ElemSize;
-	y = y * ElemSize;
-	FVector Locati(x, y, 0);
-	FTransform FoodTrans(Locati);
-	AFood* NewFood = GetWorld()->SpawnActor<AFood>(FoodClass, FoodTrans);
-	
+	CreateFood();
 }
 
 
@@ -45,13 +36,13 @@ void ASnakeActor::Tick(float DeltaTime)
 	TickDirection = LastMoveDirection;
 }
 
-void ASnakeActor::AddSnakeElement(int ElemNum)
+void ASnakeActor::AddSnakeElement(int32 ElemCount)
 {
 
-	for (int i = 0; i < ElemNum; i++)
+	for (int i = 0; i < ElemCount; i++)
 	{
 		FVector PreLoc;
-		if ((SnakeElements.Num() == 0) || ElemNum > 2)
+		if ((SnakeElements.Num() == 0) || ElemCount > 2)
 		{
 			PreLoc = FVector(SnakeElements.Num() * ElemSize, 0, 0);
 		}
@@ -114,6 +105,18 @@ void ASnakeActor::Move()
 
 	SnakeElements[0]->AddActorWorldOffset(MovementVector);
 	SnakeElements[0]->ToggleCol();
+}
+
+void ASnakeActor::CreateFood()
+{
+	int32 x = FMath::FRandRange(-9, 9);
+	int32 y = FMath::FRandRange(-18, 18);
+
+	x = x * ElemSize;
+	y = y * ElemSize;
+	FVector Locati(x, y, 0);
+	FTransform FoodTrans(Locati);
+	AFood* NewFood = GetWorld()->SpawnActor<AFood>(FoodClass, FoodTrans);
 }
 
 void ASnakeActor::SnakeElementOverlap(ASnakeElementBase* OverlappedBlock, AActor* Other)
