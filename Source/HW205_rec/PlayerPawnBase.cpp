@@ -20,7 +20,7 @@ void APlayerPawnBase::BeginPlay()
 {
 	Super::BeginPlay();
 	SetActorRotation(FRotator(-90, 0, 0));
-	SetActorLocation(FVector(0, 0, 1200));
+	SetActorLocation(FVector(0, 0, 1400));
 	CreateSnakeActor();
 	
 }

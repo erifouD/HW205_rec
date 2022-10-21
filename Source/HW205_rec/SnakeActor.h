@@ -68,6 +68,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Move();
 
+	void Teleport();
+
 	UFUNCTION(BlueprintCallable)
 	void CreateFood();
 

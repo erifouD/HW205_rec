@@ -38,10 +38,10 @@ void ASnakeActor::Tick(float DeltaTime)
 
 void ASnakeActor::AddSnakeElement(int32 ElemCount)
 {
+	FVector PreLoc;
 
 	for (int i = 0; i < ElemCount; i++)
 	{
-		FVector PreLoc;
 		if ((SnakeElements.Num() == 0) || ElemCount > 2)
 		{
 			PreLoc = FVector(SnakeElements.Num() * ElemSize, 0, 0);
@@ -107,10 +107,26 @@ void ASnakeActor::Move()
 	SnakeElements[0]->ToggleCol();
 }
 
+void ASnakeActor::Teleport()
+{
+	if (LastMoveDirection == EMovementDirection::DOWN || LastMoveDirection == EMovementDirection::UP)
+	{
+		FVector SecLocation = SnakeElements[1]->GetActorLocation();
+		FVector TeleportedLocation = FVector(SecLocation.X * -1, SecLocation.Y, SecLocation.Z);
+		SnakeElements[0]->SetActorLocation(TeleportedLocation);
+	}
+	else if (LastMoveDirection == EMovementDirection::LEFT || LastMoveDirection == EMovementDirection::RIGHT)
+	{
+		FVector SecLocation = SnakeElements[1]->GetActorLocation();
+		FVector TeleportedLocation = FVector(SecLocation.X, SecLocation.Y * -1, SecLocation.Z);
+		SnakeElements[0]->SetActorLocation(TeleportedLocation);
+	}
+}
+
 void ASnakeActor::CreateFood()
 {
-	int32 x = FMath::FRandRange(-9, 9);
-	int32 y = FMath::FRandRange(-18, 18);
+	int32 x = FMath::FRandRange(-10, 10);
+	int32 y = FMath::FRandRange(-21, 21);
 
 	x = x * ElemSize;
 	y = y * ElemSize;
