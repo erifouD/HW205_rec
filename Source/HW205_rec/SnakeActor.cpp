@@ -109,17 +109,15 @@ void ASnakeActor::Move()
 
 void ASnakeActor::Teleport()
 {
+	FVector SecLocation = SnakeElements[1]->GetActorLocation();
+
 	if (LastMoveDirection == EMovementDirection::DOWN || LastMoveDirection == EMovementDirection::UP)
 	{
-		FVector SecLocation = SnakeElements[1]->GetActorLocation();
-		FVector TeleportedLocation = FVector(SecLocation.X * -1, SecLocation.Y, SecLocation.Z);
-		SnakeElements[0]->SetActorLocation(TeleportedLocation);
+		SnakeElements[0]->SetActorLocation(FVector(SecLocation.X * -1, SecLocation.Y, SecLocation.Z));
 	}
 	else if (LastMoveDirection == EMovementDirection::LEFT || LastMoveDirection == EMovementDirection::RIGHT)
 	{
-		FVector SecLocation = SnakeElements[1]->GetActorLocation();
-		FVector TeleportedLocation = FVector(SecLocation.X, SecLocation.Y * -1, SecLocation.Z);
-		SnakeElements[0]->SetActorLocation(TeleportedLocation);
+		SnakeElements[0]->SetActorLocation(FVector(SecLocation.X, SecLocation.Y * -1, SecLocation.Z));
 	}
 }
 
