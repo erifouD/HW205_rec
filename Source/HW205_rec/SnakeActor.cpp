@@ -22,7 +22,7 @@ ASnakeActor::ASnakeActor()
 void ASnakeActor::BeginPlay()
 {
 	Super::BeginPlay();
-	AddSnakeElement(CountOfElementsOnStart);
+	AddSnakeElement(3);
 	SetActorTickInterval(MovementSpeed);
 	CreateFood();
 }
@@ -131,6 +131,19 @@ void ASnakeActor::CreateFood()
 	FVector Locati(x, y, 0);
 	FTransform FoodTrans(Locati);
 	AFood* NewFood = GetWorld()->SpawnActor<AFood>(FoodClass, FoodTrans);
+}
+
+void ASnakeActor::Truncate()
+{
+	int HalfElements = SnakeElements.Num() / 2;
+
+	for (HalfElements; HalfElements != 0; HalfElements--)
+	{
+		auto Tempor = SnakeElements.Last();
+		SnakeElements.RemoveAt(SnakeElements.Num() - 1);
+		Tempor->Destroy();
+	}
+
 }
 
 void ASnakeActor::SnakeElementOverlap(ASnakeElementBase* OverlappedBlock, AActor* Other)

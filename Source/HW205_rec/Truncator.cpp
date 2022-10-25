@@ -2,6 +2,8 @@
 
 
 #include "Truncator.h"
+#include "SnakeActor.h"
+#include "SnakeElementBase.h"
 
 // Sets default values
 ATruncator::ATruncator()
@@ -23,5 +25,15 @@ void ATruncator::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ATruncator::Interact(AActor* Interactor, bool DDHead)
+{
+	auto Snake = Cast<ASnakeActor>(Interactor);
+	if (IsValid(Snake))
+	{
+		Snake->Truncate();
+		Destroy();
+	}
 }
 

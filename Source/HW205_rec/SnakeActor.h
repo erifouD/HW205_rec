@@ -39,9 +39,6 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	int32 ScoreCount;
 
-	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
-	int CountOfElementsOnStart = 3;
-
 	UPROPERTY()
 	TArray<ASnakeElementBase*> SnakeElements;
 
@@ -75,6 +72,9 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void AddScore();
+
+	UFUNCTION(BlueprintCallable)
+	void Truncate();
 
 	UFUNCTION()
 	void SnakeElementOverlap(ASnakeElementBase* OverlappedBlock, AActor* Other);
