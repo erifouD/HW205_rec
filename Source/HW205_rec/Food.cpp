@@ -39,6 +39,7 @@ void AFood::Interact(AActor* Interactor, bool DDHead)
 			Snake->CreateFood();
 			Snake->ScoreCount += 10;
 			Snake->AddScore();
+			Snake->CreateTruncator();
 			if (Snake->MovementSpeed > 0.01 && Snake->ScoreCount % 100 == 0.f)
 			{
 				Snake->MovementSpeed -= 0.01;

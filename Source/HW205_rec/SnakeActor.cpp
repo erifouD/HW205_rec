@@ -4,6 +4,7 @@
 #include "SnakeActor.h"
 #include "SnakeElementBase.h"
 #include "Food.h"
+#include "Truncator.h"
 #include "UnrealInterface.h"
 
 
@@ -123,14 +124,22 @@ void ASnakeActor::Teleport()
 
 void ASnakeActor::CreateFood()
 {
-	int32 x = FMath::FRandRange(-10, 10);
-	int32 y = FMath::FRandRange(-21, 21);
+	AFood* NewFood = GetWorld()->SpawnActor<AFood>(FoodClass, ProductPos(10, 21));
+}
 
-	x = x * ElemSize;
-	y = y * ElemSize;
-	FVector Locati(x, y, 0);
-	FTransform FoodTrans(Locati);
-	AFood* NewFood = GetWorld()->SpawnActor<AFood>(FoodClass, FoodTrans);
+
+void ASnakeActor::CreateTruncator()
+{
+	int deez = 0;
+	int32 Percent = FMath::FRandRange(1, (100 / TruncatorChance));
+	if (deez > 10 && Percent == 5)
+	{
+		ATruncator* NewTruncator = GetWorld()->SpawnActor<ATruncator>(TruncatorClass, ProductPos(10, 21));
+		deez = 0;
+	}
+	deez++;
+
+	
 }
 
 void ASnakeActor::Truncate()
@@ -144,6 +153,13 @@ void ASnakeActor::Truncate()
 		Tempor->Destroy();
 	}
 
+}
+
+FTransform ASnakeActor::ProductPos(int xin, int yin)
+{
+	int32 x = FMath::FRandRange(-xin, xin);
+	int32 y = FMath::FRandRange(-yin, yin);
+	return FTransform(FVector(x * ElemSize, y * ElemSize, 0));
 }
 
 void ASnakeActor::SnakeElementOverlap(ASnakeElementBase* OverlappedBlock, AActor* Other)

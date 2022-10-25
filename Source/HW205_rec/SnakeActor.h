@@ -9,6 +9,7 @@
 
 class ASnakeElementBase;
 class AFood;
+class ATruncator;
 
 UENUM()
 enum class EMovementDirection
@@ -34,6 +35,9 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AFood> FoodClass;
 
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<ATruncator> TruncatorClass;
+
 	EMovementDirection TickDirection;
 
 	UPROPERTY(BlueprintReadWrite)
@@ -44,6 +48,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly)
 	float ElemSize;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	int TruncatorChance = 5;
 
 	UPROPERTY()
 	EMovementDirection LastMoveDirection;
@@ -70,11 +77,18 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void CreateFood();
 
+	UFUNCTION(BlueprintCallable)
+	void CreateTruncator();
+
 	UFUNCTION(BlueprintImplementableEvent)
 	void AddScore();
 
 	UFUNCTION(BlueprintCallable)
 	void Truncate();
+
+
+
+	FTransform ProductPos(int xin, int yin);
 
 	UFUNCTION()
 	void SnakeElementOverlap(ASnakeElementBase* OverlappedBlock, AActor* Other);
