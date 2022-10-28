@@ -10,6 +10,7 @@
 class ASnakeElementBase;
 class AFood;
 class ATruncator;
+class ABigSphere;
 
 UENUM()
 enum class EMovementDirection
@@ -38,6 +39,9 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<ATruncator> TruncatorClass;
 
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<ABigSphere> BigSphereClass;
+
 	EMovementDirection TickDirection;
 
 	UPROPERTY(BlueprintReadWrite)
@@ -51,6 +55,10 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	int TruncatorChance = 5;
+
+	int deez = 0;
+
+	int eaten = 0;
 
 	UPROPERTY()
 	EMovementDirection LastMoveDirection;
@@ -85,6 +93,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void Truncate();
+
+	UFUNCTION(BlueprintCallable)
+	void BigSpSpawn();
 
 
 

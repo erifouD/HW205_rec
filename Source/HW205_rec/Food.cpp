@@ -35,16 +35,19 @@ void AFood::Interact(AActor* Interactor, bool DDHead)
 		auto Snake = Cast<ASnakeActor>(Interactor);
 		if (IsValid(Snake))
 		{
+			Snake->eaten++;
 			Snake->AddSnakeElement();
 			Snake->CreateFood();
 			Snake->ScoreCount += 10;
 			Snake->AddScore();
 			Snake->CreateTruncator();
-			if (Snake->MovementSpeed > 0.01 && Snake->ScoreCount % 100 == 0.f)
+			if (Snake->MovementSpeed > 0.01 && Snake->eaten % 10 == 0.f)
 			{
 				Snake->MovementSpeed -= 0.01;
 				Snake->SetActorTickInterval(Snake->MovementSpeed);
+				Snake->BigSpSpawn();
 			}
+
 		}		
 	}
 	Destroy();

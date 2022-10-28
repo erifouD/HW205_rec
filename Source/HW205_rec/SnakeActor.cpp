@@ -4,6 +4,7 @@
 #include "SnakeActor.h"
 #include "SnakeElementBase.h"
 #include "Food.h"
+#include "BigSphere.h"
 #include "Truncator.h"
 #include "UnrealInterface.h"
 
@@ -130,9 +131,8 @@ void ASnakeActor::CreateFood()
 
 void ASnakeActor::CreateTruncator()
 {
-	int deez = 0;
 	int32 Percent = FMath::FRandRange(1, (100 / TruncatorChance));
-	if (deez > 10 && Percent == 5)
+	if (deez > 10 && Percent == 1)
 	{
 		ATruncator* NewTruncator = GetWorld()->SpawnActor<ATruncator>(TruncatorClass, ProductPos(10, 21));
 		deez = 0;
@@ -153,6 +153,12 @@ void ASnakeActor::Truncate()
 		Tempor->Destroy();
 	}
 
+}
+
+void ASnakeActor::BigSpSpawn()
+{
+	int32 PercentRag = FMath::FRandRange(1, 3);
+	if(PercentRag == 1) ABigSphere* NewSphere = GetWorld()->SpawnActor<ABigSphere>(BigSphereClass, ProductPos(9, 20));
 }
 
 FTransform ASnakeActor::ProductPos(int xin, int yin)

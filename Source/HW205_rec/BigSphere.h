@@ -3,21 +3,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UnrealInterface.h"
 #include "GameFramework/Actor.h"
-#include "Food.generated.h"
+#include "UnrealInterface.h"
+#include "BigSphere.generated.h"
 
 UCLASS()
-class HW205_REC_API AFood : public AActor, public IUnrealInterface
+class HW205_REC_API ABigSphere : public AActor, public IUnrealInterface
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AFood();
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	UStaticMeshComponent* MeshComp;
+	ABigSphere();
 
 protected:
 	// Called when the game starts or when spawned
@@ -28,4 +25,5 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void Interact(AActor* Interactor, bool DDHead) override;
+
 };
