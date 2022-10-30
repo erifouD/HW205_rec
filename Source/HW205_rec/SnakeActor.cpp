@@ -129,13 +129,29 @@ void ASnakeActor::CreateFood()
 }
 
 
-void ASnakeActor::CreateTruncator()
+void ASnakeActor::CreateUlta()
 {
-	int32 Percent = FMath::FRandRange(1, (100 / TruncatorChance));
-	if (deez > 10 && Percent == 1)
+	int32 Percent = FMath::FRandRange(1, (100 / UltaChance));
+	int32 ChooseUlta = FMath::FRandRange(1, 3);
+	if (deez > 10 && Percent == 1 && ChooseUlta == 1)
 	{
-		ATruncator* NewTruncator = GetWorld()->SpawnActor<ATruncator>(TruncatorClass, ProductPos(10, 21));
+		ATruncator* NewUlta = GetWorld()->SpawnActor<ATruncator>(TruncatorClass, ProductPos(10, 21));
 		deez = 0;
+		fUCkTHiSsHIt = false;
+		TruncatorToDestroy = NewUlta; 
+		UltaEvent();
+		
+		
+	}
+	else if (deez > 10 && Percent == 1 && ChooseUlta != 1)
+	{
+		ABigSphere* NewUlta = GetWorld()->SpawnActor<ABigSphere>(BigSphereClass, ProductPos(9, 20));
+		deez = 0;
+		fUCkTHiSsHIt = true;
+		BigSphereToDestroy = NewUlta;
+		UltaEvent();
+		
+		
 	}
 	deez++;
 
@@ -155,10 +171,11 @@ void ASnakeActor::Truncate()
 
 }
 
-void ASnakeActor::BigSpSpawn()
+
+void ASnakeActor::FDestroyUlta()
 {
-	int32 PercentRag = FMath::FRandRange(1, 3);
-	if(PercentRag == 1) ABigSphere* NewSphere = GetWorld()->SpawnActor<ABigSphere>(BigSphereClass, ProductPos(9, 20));
+	if (fUCkTHiSsHIt) BigSphereToDestroy->Destroy();
+	else TruncatorToDestroy->Destroy();
 }
 
 FTransform ASnakeActor::ProductPos(int xin, int yin)

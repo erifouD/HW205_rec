@@ -33,7 +33,13 @@ void ATruncator::Interact(AActor* Interactor, bool DDHead)
 	if (IsValid(Snake))
 	{
 		Snake->Truncate();
+		Snake->UltaDestroy();
 		Destroy();
 	}
+}
+
+void ATruncator::Endtime()
+{
+	Destroy();
 }
 

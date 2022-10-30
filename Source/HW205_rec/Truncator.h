@@ -26,4 +26,6 @@ public:
 
 	virtual void Interact(AActor* Interactor, bool DDHead) override;
 
+	void Endtime();
+
 };

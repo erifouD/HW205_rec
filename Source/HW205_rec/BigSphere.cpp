@@ -36,6 +36,7 @@ void ABigSphere::Interact(AActor* Interactor, bool DDHead)
 			Snake->ScoreCount += 50;
 			Snake->AddScore();
 			Snake->eaten++;
+			Snake->UltaDestroy();
 		}
 	}
 	Destroy();

@@ -50,11 +50,19 @@ public:
 	UPROPERTY()
 	TArray<ASnakeElementBase*> SnakeElements;
 
+	UPROPERTY()
+	ATruncator* TruncatorToDestroy;
+
+	UPROPERTY()
+	ABigSphere* BigSphereToDestroy;
+
+	bool fUCkTHiSsHIt;
+
 	UPROPERTY(EditDefaultsOnly)
 	float ElemSize;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	int TruncatorChance = 5;
+	int UltaChance = 5;
 
 	int deez = 0;
 
@@ -86,16 +94,24 @@ public:
 	void CreateFood();
 
 	UFUNCTION(BlueprintCallable)
-	void CreateTruncator();
+	void CreateUlta();
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void AddScore();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void UltaDestroy();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void UltaEvent();
 
 	UFUNCTION(BlueprintCallable)
 	void Truncate();
 
 	UFUNCTION(BlueprintCallable)
-	void BigSpSpawn();
+	void FDestroyUlta();
+
+
 
 
 
