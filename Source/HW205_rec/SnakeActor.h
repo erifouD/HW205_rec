@@ -30,6 +30,8 @@ public:
 	// Sets default values for this actor's properties
 	ASnakeActor();
 
+	FTimerHandle TimerHandle;
+
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<ASnakeElementBase> SnakeElementClass;
 
@@ -49,6 +51,9 @@ public:
 
 	UPROPERTY()
 	TArray<ASnakeElementBase*> SnakeElements;
+
+	UPROPERTY(BlueprintReadWrite)
+	TArray<ASnakeElementBase*> DeadElements;
 
 	UPROPERTY()
 	ATruncator* TruncatorToDestroy;
@@ -101,6 +106,8 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void UltaDestroy();
+
+	void DestroyinDeadBlocks();
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void UltaEvent();

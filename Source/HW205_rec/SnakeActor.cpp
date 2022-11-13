@@ -158,17 +158,26 @@ void ASnakeActor::CreateUlta()
 	
 }
 
+void ASnakeActor::DestroyinDeadBlocks()
+{
+	if (DeadElements.Num() > 0)
+	{
+		int32 elemIndex = FMath::FRandRange(0, DeadElements.Num() - 1);
+		DeadElements[elemIndex]->Destroy();
+		DeadElements.RemoveAt(elemIndex);
+	}
+	else  GetWorldTimerManager().ClearTimer(TimerHandle);
+}
+
 void ASnakeActor::Truncate()
 {
 	int HalfElements = SnakeElements.Num() / 2;
-
 	for (HalfElements; HalfElements != 0; HalfElements--)
 	{
-		auto Tempor = SnakeElements.Last();
+		DeadElements.Add(SnakeElements.Last());
 		SnakeElements.RemoveAt(SnakeElements.Num() - 1);
-		Tempor->Destroy();
 	}
-
+	GetWorldTimerManager().SetTimer(TimerHandle, this, &ASnakeActor::DestroyinDeadBlocks, 0.2f, true, 7.0f);
 }
 
 
